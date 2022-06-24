@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>
+            Check Password Strength
+        </title>
+        <script language="javascript">
+            function passwordChanged() {
+                var strength = document.getElementById('strength');
+                var strongRegex = new RegExp("^(?=.{14,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+                var mediumRegex = new RegExp("^(?=.{10,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+                var enoughRegex = new RegExp("(?=.{8,}).*", "g");
+                var pwd = document.getElementById("password");
+                if (pwd.value.length == 0) {
+                    strength.innerHTML = 'Type Password';
+                } else if (false == enoughRegex.test(pwd.value)) {
+                    strength.innerHTML = '<span style="color:red">More Characters!</span>';
+                } else if (strongRegex.test(pwd.value)) {
+                    strength.innerHTML = '<span style="color:green">Strong!</span>';
+                } else if (mediumRegex.test(pwd.value)) {
+                    strength.innerHTML = '<span style="color:orange">Medium!</span>';
+                } else {
+                    strength.innerHTML = '<span style="color:red">Weak!</span>';
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="w3-container w3-display-middle">
+            <div class="w3-panel w3-margin w3-padding-24 w3-card ">
+                <p style="text-align: center;">Check Password Strength</p>
+                <input style="width: 100%"  name="password" id="password" type="text" size="15" maxlength="100" onkeyup="return passwordChanged();" /><br>
+
+                <div style="text-align: center;" >
+                    <span id="strength">Type Password</span>
+                </div>
+
+                </div>
+
+        </div>
+    </body>
+</html>
